@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   networkId: 1,
 };
 export default function UseWallet() {
-  const { ctx: _this } = getCurrentInstance();
+  const { ctx: that } = getCurrentInstance();
 
   const walletObj = reactive({ ...INITIAL_STATE });
   const fetching = ref(false);
@@ -30,6 +30,7 @@ export default function UseWallet() {
   // methods wallte.js
   const resetApp = async () => {
     const { web3 } = toRaw(walletObj);
+    localStorage.clear();
     if (web3 && web3.currentProvider && web3.currentProvider.close) {
       await web3.currentProvider.close();
     }
@@ -39,7 +40,7 @@ export default function UseWallet() {
     Object.keys(INITIAL_STATE).forEach((e) => {
       walletObj[e] = INITIAL_STATE[e];
     });
-    _this.$forceUpdate();
+    that.$forceUpdate();
   };
 
   const getUserBalance = () => {
