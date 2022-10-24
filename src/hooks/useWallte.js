@@ -2,7 +2,6 @@ import {
   ref, reactive, getCurrentInstance, toRefs, toRaw
 } from 'vue';
 import { ethers } from 'ethers'
-import Web3, { utils } from 'web3';
 import Web3Modal from 'web3modal';
 import { getChainData } from '@/web3/tools';
 import { providerOptions } from '@/web3/config';
@@ -25,7 +24,7 @@ export default function UseWallet() {
   const web3Modal = new Web3Modal({
     theme: 'dark',
     network: getChainData(toRaw(walletObj.chainId)).network,
-    cacheProvider: true,
+    cacheProvider: false,
     providerOptions,
   });
   // methods wallte.js
