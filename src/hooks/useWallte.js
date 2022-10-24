@@ -53,7 +53,6 @@ export default function UseWallet() {
   const getAccountAssets = async () => {
     fetching.value = true;
     // get account balances
-    console.log(1)
     console.log(await toRaw(walletObj.web3)
       .getBalance(toRaw(walletObj.userAddress)))
     // assets.value = await getUserBalance();

@@ -15,29 +15,12 @@ const providerOptions = {
       infuraId: 'd10c4ff706c546c485a8d9d92d1e5096', // TODO infuraId
     },
   },
-  // https://github.com/torusresearch/torus-embed#readme
-  torus: {
-    package: Torus,
-  },
-  // https://docs.fortmatic.com/
-  fortmatic: {
-    package: Fortmatic,
+  bitkeep: {
+    package: WalletConnectProvider,
     options: {
-      key: 'xxxxxxxxxx', // TODO key
+      infuraId: 'd10c4ff706c546c485a8d9d92d1e5096', // TODO infuraId
     },
-  },
-  // https://docs.authereum.com/integration
-  authereum: {
-    package: Authereum,
-  },
-  // https://docs.bitski.com/
-  bitski: {
-    package: Bitski,
-    options: {
-      clientId: 'xxxxxxxxxx', // TODO
-      callbackUrl: `${window.location.href}bitski-callback.html`,
-    },
-  },
+  }
 };
 
 export { providerOptions };
