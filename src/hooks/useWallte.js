@@ -44,19 +44,15 @@ export default function UseWallet() {
   };
 
   const getUserBalance = () => {
-    toRaw(walletObj.web3).getBalance(toRaw(walletObj.userAddress)).then((res) => {
-      console.log(res)
-      // (res ? utils.fromWei(res.toString(), 'ether') : 0)
+    return toRaw(walletObj.web3).getBalance(toRaw(walletObj.userAddress)).then((res) => {
+      return (res ? ethers.utils.formatEther(res) : 0)
     });
   }
 
   const getAccountAssets = async () => {
     fetching.value = true;
     // get account balances
-    console.log(await toRaw(walletObj.web3)
-      .getBalance(toRaw(walletObj.userAddress)))
-    // assets.value = await getUserBalance();
-    // console.log(assets.value)
+    assets.value = await getUserBalance();
   };
   const subscribeProvider = async (provider) => {
     if (!provider.on) {
@@ -72,16 +68,12 @@ export default function UseWallet() {
       console.log('333', chainId);
       walletObj.chainId = chainId;
       walletObj.networkId = chainId;
-      const provider = await web3Modal.connect();
-      let web3 = new ethers.providers.Web3Provider(provider);
-      walletObj.web3 = web3
-      await getAccountAssets();
+      onConnect()
     });
   };
 
   const onConnect = async () => {
     const provider = await web3Modal.connect();
-    console.log('provider', provider)
     await subscribeProvider(provider);
     let web3 = new ethers.providers.Web3Provider(provider);
     let accounts = await web3.listAccounts()
